@@ -1,0 +1,4 @@
+const creatureAutoComplete =({})  => {
+//function CreatureAUTOcOMPLETE
+}
+
