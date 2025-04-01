@@ -1,19 +1,116 @@
-const fetchData = async(searchTerm) => {
-    const response = await axios.get('http://omdbapi.com/',{
-    params: {
-    apikey:'c784a164',
-    s: 'avengers'
-    }
-    })
+// const fetchData = async(searchTerm) => {
+//     const response = await axios.get('http://omdbapi.com/',{
+//     params: {
+//     apikey:'c784a164',
+//     s: 'avengers'
+//     }
+//     })
     
-    if(response.data.Error){
-    return[]
+//     if(response.data.Error){
+//     return[]
     
-    }
+//     }
     
-    console.log(response.data.Search)
-    }
+//     console.log(response.data.Search)
+//     }
     //fetchData()
+autoCompleteConfig = {
+renderOption(movie){
+const imgSec = movie.Poster == 'N/A' ? '' :movie.poster
+return`
+<img src="${imgSrc}"/>
+${movie.Title}(${movie.year})
+`
+},
+inputValue(movie){
+return movie.Title
+
+
+},
+async fetchData(searchTerm){
+apiMovieURL ='http://www.omdapi.com/' 
+const response = await axios.get(apiMovieURL, {
+params: {
+apikey: 'c784a164',
+s: searchTerm
+}
+
+
+})
+if(response.data.error){
+return[]
+
+}
+console.log(response.data)
+return response.data.Search
+}
+
+
+}
+
+creatureAutoComplete({
+autoCompleteConfig,
+root: document.querySelector('#left-autocomplete'),
+onOptionSelect(movie){
+document.querySelector('.tutorial').classList.add('is-hidden')
+onMovieSelect(movie, document.querySelector/('#left-summery'), 'left')
+
+}
+
+})
+//crear 2 variables para leftmovie y rightmovie
+let leftmovie
+let rightmovie
+
+const onMovieSelect = async (movie, summaryElement, side) =>{
+    const response = await axios.get('http://www.omdibapi.com/', {
+params:{
+apikey: 'c784a164',
+i: movie.imdbID
+}
+
+
+    })
+console.log(response.data)
+summaryElement.innerHTML = movieTemplance(response.data)
+if(side === 'left'){
+leftmovie = response.data
+
+}else{
+rightmovie = response.data
+
+}
+if(leftmovie && rightmovie){
+runComparison ()
+
+}
+
+}
+const runComparison = () =>{
+console.log('comparacion de peliculas')
+const leftSidesStats = document.querySelectorAll('#left-summary .notification')
+const rightSideStats = document.querySelectorAll('#rigth-summary .notification')
+
+
+leftSidesStats.forEach((LeftStat, index) =>{
+const rightStat = rightSideStats[index]
+const leftSideValue = parseInt(LeftStat.dataset.value)
+const rightSideValue = parseInt(rightStat.dataset.value)
+if(rightSideValue > leftSideValue){
+LeftStat.classList.remove('is-primary')
+LeftStat.classList.add('is-danger')
+
+}else{
+
+
+}
+})
+
+
+}
+
+
+
     const root = document.querySelector('.autocomplete')
     root.innerHTML = `
     <label><b>Busqueda de peliculas</b></label>
