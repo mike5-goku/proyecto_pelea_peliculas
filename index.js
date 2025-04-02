@@ -101,15 +101,78 @@ LeftStat.classList.remove('is-primary')
 LeftStat.classList.add('is-danger')
 
 }else{
-
-
+rightStat.classList.remove(is-primary)
+rightStat.classList.add(is-primary)
 }
 })
 
 
 }
+const movieTemplates = (movieDetails) =>{
+    //Transformar a numeros los strings que llevan los datos
+    const dollars = parseInt(movieDetails.BoxOffice.replace(/\$/g,'').replace(/,/g,''))
+    console.log(dollars)
+    const metascore = parseInt(movieDetails.Metascore)
+    const imdbRating = parseFloat(movieDetails.imdbRating)
+    const imdbvotes = parseInt(movieDetails.indbvotes.replace(/,/g,''))
+    console.log(metascore, imdbRating, imdbvotes)
+    const awards = movieDetails.awards.split('').reduce((prev,word) => {
+        const value = parseInt(word)
+        if(isNaN(value)){
+            return prev
+        }else{
+            return prev + value
+        }
+        
+    },0)
+    console.log('Awards', awards)
+}
+//Agregar la propiedad data-value a cada elemento del templace
+return`
+<artucle class="media">
+<figure class="media-left">
+<p class="image">
+<img src="${movieDetail.Postero}"/>
+</p>
+</figure>
+
+<div class="media-content">
+<div class="content">
+<h1>${movieDetail.Title}</h1>
+<h4>${movieDetail.Genre}</h4>
+<p>${movieDetail.Plot}</p>
+</div>
+</div>
+<article/>
+<article data-values=${awards} class="notification is-primary">
+<p class="title"${movieDetail.awards}</p>
+<p class="subtitle"Awards</p>
+</article>
+<article data-values=${dollars} class="notification is-primary">
+<p class="title"${movieDetail.BoxOffice}</p>
+<p class="subtitle"BoxOffice</p>
+</article>
+<article data-values=${metascore} class="notification is-primary">
+<p class="title"${movieDetail.Metascore}</p>
+<p class="subtitle"metascore</p>
+</article>
+
+<article data-values=${imdbRating} class="notification is-primary">
+<p class="title"${movieDetail.imdbRating}</p>
+<p class="subtitle"imdRating</p>
+
+<article data-values=${awards} class="notification is-primary">
+<p class="title"${movieDetail.awards}</p>
+<p class="subtlite"Awards</p>
 
 
+
+</article>
+</article>
+
+<
+`
+console.log("hola")
 
     const root = document.querySelector('.autocomplete')
     root.innerHTML = `
