@@ -108,15 +108,15 @@ rightStat.classList.add(is-primary)
 
 
 }
-const movieTemplates = (movieDetails) =>{
+const movieTemplates = (movieDetail) =>{
     //Transformar a numeros los strings que llevan los datos
-    const dollars = parseInt(movieDetails.BoxOffice.replace(/\$/g,'').replace(/,/g,''))
+    const dollars = parseInt(movieDetail.BoxOffice.replace(/\$/g,'').replace(/,/g,''))
     console.log(dollars)
-    const metascore = parseInt(movieDetails.Metascore)
-    const imdbRating = parseFloat(movieDetails.imdbRating)
-    const imdbvotes = parseInt(movieDetails.indbvotes.replace(/,/g,''))
+    const metascore = parseInt(movieDetail.Metascore)
+    const imdbRating = parseFloat(movieDetail.imdbRating)
+    const imdbvotes = parseInt(movieDetail.indbvotes.replace(/,/g,''))
     console.log(metascore, imdbRating, imdbvotes)
-    const awards = movieDetails.awards.split('').reduce((prev,word) => {
+    const awards = movieDetail.awards.split('').reduce((prev,word) => {
         const value = parseInt(word)
         if(isNaN(value)){
             return prev
@@ -132,7 +132,7 @@ return`
 <artucle class="media">
 <figure class="media-left">
 <p class="image">
-<img src="${movieDetail.Postero}"/>
+<img src="${movieDetail.Poster}"/>
 </p>
 </figure>
 
@@ -152,7 +152,7 @@ return`
 <p class="title"${movieDetail.BoxOffice}</p>
 <p class="subtitle"BoxOffice</p>
 </article>
-<article data-values=${metascore} class="notification is-primary">
+<article data-values=${Metascore} class="notification is-primary">
 <p class="title"${movieDetail.Metascore}</p>
 <p class="subtitle"metascore</p>
 </article>
@@ -161,9 +161,9 @@ return`
 <p class="title"${movieDetail.imdbRating}</p>
 <p class="subtitle"imdRating</p>
 
-<article data-values=${awards} class="notification is-primary">
-<p class="title"${movieDetail.awards}</p>
-<p class="subtlite"Awards</p>
+<article data-values=${imdbvotes} class="notification is-primary">
+<p class="title"${movieDetail.imdbvotes}</p>
+<p class="subtlite"imd votes</p>
 
 
 
